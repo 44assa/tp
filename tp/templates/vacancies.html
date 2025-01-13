@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Системный администратор</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+<header>
+    <div class="name">
+        <img src="{% static 'images/logotip_nav.png' %}" class="logo_nav"/>
+        <img class="logo" src="{% static 'images/logotip.png' %}">
+    </div>
+</header>
+<main>
+    <div class="body">
+        <div class="navigation">
+            <nav>
+                <ul>
+                    <li><div><a href={% url 'home' %}>Главная</a></div></li>
+                    <li><div><a href={% url 'all' %}>Общая статистика</a></div></li>
+                    <li><div><a href={% url 'demend' %}>Востребованность</a></div></li>
+                    <li><div><a href={% url 'geography' %}>География</a></div></li>
+                    <li><div><a href={% url 'skills' %}>Навыки</a></div></li>
+                    <li><div style="background-color: #051622; border-radius: 10px 0 0 10px;"><a style="color: #FFFFFF !important;" href="/">Последние ваканнсии</a></div></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="home_text">
+            
+            {% for data in vacancies %}
+            <h1>{{ data.title }}</h1>
+            <div class="empty_skills"></div>
+        {% endfor %}
+        </div>
+        <div class="LVtable" style="margin-left: 150px;">
+            {% for i in vacancy_data %}
+            <h3>{{ i.name }}</h3>
+            <p>Описание: {{ i.description }}</p>
+            <p>Навыки: {{ i.key_skills }}</p>
+            <p>Компания: {{ i.employer }}</p>
+            <p>Зарплата: {{ i.salary }}</p>
+            <p>Город: {{ i.area }}</p>
+            <p>Дата публикации: {{ i.published_at }}</p>
+            <p>Ссылка: {{ i.alternate_url }}</p>
+        {% endfor %}
+        </div>
+    </div>
+</main>
+<footer>
+    <p>Леонов Максим Алексеевич</p>
+    <p>АТ-18</p>
+</footer>
+</body>
+</html>

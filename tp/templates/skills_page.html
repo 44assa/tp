@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Системный администратор</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+<header>
+    <div class="name">
+        <img src="{% static 'images/logotip_nav.png' %}" class="logo_nav"/>
+        <img class="logo" src="{% static 'images/logotip.png' %}">
+    </div>
+</header>
+<main>
+    <div class="body">
+        <div class="navigation">
+            <nav>
+                <ul>
+                    <li><div><a href={% url 'home' %}>Главная</a></div></li>
+                    <li><div><a href={% url 'all' %}>Общая статистика</a></div></li>
+                    <li><div><a href={% url 'demend' %}>Востребованность</a></div></li>
+                    <li><div><a href={% url 'geography' %}>География</a></div></li>
+                    <li><div style="background-color: #051622; border-radius: 10px 0 0 10px;"><a style="color: #FFFFFF !important;" href="/">Навыки</a></div></li>
+                    <li><div><a href={% url 'lastVacancy' %}>Последние вакансии</a></div></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="home_text" style="top: 200px">
+            {% for data in skills_info %}
+            <h1>{{ data.table_title }}</h1>
+            <div class="tables_skills">
+                {{ data.skills_table|safe }}
+            </div>
+            <img class="skills_graph" src={{ data.skills_chart.url }}/>
+            <div class="empty_skills"></div>
+        {% endfor %}
+        </div>
+    </div>
+</main>
+<footer>
+    <p>Леонов Максим Алексеевич</p>
+    <p>АТ-18</p>
+</footer>
+</body>
+</html>
