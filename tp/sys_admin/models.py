@@ -1,24 +1,29 @@
 from django.db import models
 
-class LandingPageContent(models.Model):
-    description = models.TextField(blank=True, verbose_name='Описание основной информации')
-    image = models.ImageField(upload_to='uploads/images/%Y/%m/%d', blank=False, verbose_name='Изображение')
 
-class MarketTrends(models.Model):
-    salary_trend_chart = models.ImageField(upload_to='uploads/images/%Y/%m/%d', blank=False, verbose_name='Диаграмма изменения зарплат')
-    vacancy_trend_chart = models.ImageField(upload_to='uploads/images/%Y/%m/%d', blank=False, verbose_name='Диаграмма изменения вакансий')
-    trend_table = models.TextField(blank=False, verbose_name='Сводная таблица тенденций')
+class MainPageContent(models.Model):
+    description = models.TextField(blank=True, verbose_name='Описание профессии')
+    image = models.ImageField(upload_to='uploads/main_page/%Y/%m/%d', verbose_name='Фото')
 
-class RegionalStatistics(models.Model):
-    city_salary_chart = models.ImageField(upload_to='uploads/images/%Y/%m/%d', blank=False, verbose_name='Диаграмма зарплат по регионам')
-    city_vacancy_share_chart = models.ImageField(upload_to='uploads/images/%Y/%m/%d', blank=False, verbose_name='Диаграмма доли вакансий по регионам')
-    regional_table = models.TextField(blank=False, verbose_name='Таблица региональной статистики')
 
-class CompetencyAnalytics(models.Model):
-    table_title = models.TextField(blank=False, verbose_name='Заголовок таблицы', max_length=30)
-    competency_table = models.TextField(blank=False, verbose_name='Таблица компетенций')
-    skills_chart = models.ImageField(upload_to='uploads/images/%Y/%m/%d', blank=False, verbose_name='Диаграмма ключевых навыков')
+class DemandData(models.Model):
+    salary_chart = models.ImageField(upload_to='uploads/demand/%Y/%m/%d', verbose_name='График зарплат по годам')
+    vacancy_chart = models.ImageField(upload_to='uploads/demand/%Y/%m/%d', verbose_name='График вакансий по годам')
+    demand_table = models.TextField(verbose_name='Таблица востребованности')
 
-class RecentJobListing(models.Model):
-    headline = models.CharField(max_length=100, verbose_name='Название вакансии')
-    target_vacancy = models.TextField(blank=False, verbose_name='Целевая вакансия для анализа')
+
+class GeographyData(models.Model):
+    city_salary_chart = models.ImageField(upload_to='uploads/geography/%Y/%m/%d', verbose_name='График зарплат по городам')
+    city_vacancy_chart = models.ImageField(upload_to='uploads/geography/%Y/%m/%d', verbose_name='График вакансий по городам')
+    geography_table = models.TextField(verbose_name='Таблица географии')
+
+
+class SkillsetData(models.Model):
+    table_title = models.CharField(max_length=50, verbose_name='Название таблицы')
+    skills_table = models.TextField(verbose_name='Таблица навыков')
+    skills_chart = models.ImageField(upload_to='uploads/skills/%Y/%m/%d', verbose_name='График навыков')
+
+
+class RecentVacancy(models.Model):
+    title = models.CharField(max_length=150, verbose_name='Название')
+    vacancy_query = models.TextField(verbose_name='Запрос для поиска вакансий')
